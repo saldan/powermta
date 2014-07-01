@@ -8,10 +8,10 @@ module Net
     end
 
     # only a merging 1 part
-    def send_merge_message( msgstr, from_addr, verp = true,  to_addrs_with_variables = [], exclude_from = false)      
+    def send_merge_message( msgstr, from_addr, verp = true,  to_addrs_with_variables = [], include_from = true)      
       raise IOError, 'closed session' unless @socket
 
-      xmrg_from from_addr, verp unless exclude_from
+      xmrg_from from_addr, verp if include_from
 
       to_addrs_with_variables.each do |addr|
         xmrg_to addr[:address], addr[:variables]
